@@ -17,6 +17,7 @@ class Distractor extends Component {
           Move the blue boxes into the red boxes.
         </p>
 
+        <button onClick={this.props.prev}>Previous</button>
         <button onClick={() => this.setState({completed: true})}>play</button>
         {this.state.completed && <button onClick={this.props.next}>Next</button>}
 

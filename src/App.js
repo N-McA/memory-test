@@ -5,26 +5,46 @@ import Consent from './Consent.js'
 import GiveCode from './GiveCode.js'
 import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
+import Completed from './Completed.js'
 
+let CODES=['bad fish breath', 'crazy silly nonsense', '07-35-37-23-48']
 
 class App extends Component {
-  currentStateString = 'CONSENT';
-  states = {
-    'CONSENT': (<Consent consentGiven={() => this.transition('GIVE_CODE')}/>),
-    'GIVE_CODE': (<GiveCode next={() => this.transition('DISTRACTOR')}/>),
-    'DISTRACTOR': (<Distractor next={() => this.transition('ASK_CODE')}/>),
-    'ASK_CODE': (<AskCode/>),
-  };
+  transition(stateIdx) {
+    this.setState({
+      currentStateIdx: stateIdx,
+      pageState: this.states[stateIdx],
+    })
+  }
+  next = (x) => {
+    this.transition(this.state.currentStateIdx + 1)
+  }
+  prev = () => {
+    this.transition(this.state.currentStateIdx - 1)
+  }
+  states = [
+    (<Consent consentGiven={this.next}/>),
+
+    (<GiveCode code={CODES[0]} next={this.next} prev={this.prev}/>),
+    (<Distractor next={this.next} prev={this.prev}/>),
+    (<AskCode code={CODES[0]} next={this.next} prev={this.prev}/>),
+    
+    (<GiveCode code={CODES[1]} next={this.next} prev={this.prev}/>),
+    (<Distractor next={this.next} prev={this.prev}/>),
+    (<AskCode code={CODES[1]} next={this.next} prev={this.prev}/>),
+
+    (<GiveCode code={CODES[2]} next={this.next} prev={this.prev}/>),
+    (<Distractor next={this.next} prev={this.prev}/>),
+    (<AskCode code={CODES[2]} next={this.next} prev={this.prev}/>),
+
+    (<Completed/>),
+  ];
   constructor(props) {
     super(props);
     this.state = {
-      pageState: this.states[this.currentStateString],
+      pageState: this.states[0],
+      currentStateIdx: 0,
     }
-  }
-  transition(stateName) {
-    this.setState({
-      pageState: this.states[stateName],
-    })
   }
   render() {
     return (

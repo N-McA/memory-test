@@ -5,11 +5,12 @@ class GiveCode extends Component {
   render() {
     return (
       <div className="GiveCode">
-        <h1>GiveCode</h1>
 
         <p>
           Please inspect the following code.
         </p>
+
+        <h2>{this.props.code}</h2>
 
         <p>
           You will later be asked to recall this code.
