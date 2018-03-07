@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import Balls from './Balls.js'
 
 class Distractor extends Component {
   constructor(props) {
@@ -8,19 +9,13 @@ class Distractor extends Component {
       completed: false,
     }
   }
+  
   render() {
     return (
       <div className="Distractor">
-        <h1>Game</h1>
-
-        <p>
-          Move the blue boxes into the red boxes.
-        </p>
-
+        <Balls onComplete={() => this.setState({completed: true})}/>
         <button onClick={this.props.prev}>Previous</button>
-        <button onClick={() => this.setState({completed: true})}>play</button>
         {this.state.completed && <button onClick={this.props.next}>Next</button>}
-
       </div>
     );
   }
