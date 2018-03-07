@@ -6,6 +6,8 @@ import GiveCode from './GiveCode.js'
 import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
 import Completed from './Completed.js'
+import shajs from 'sha.js'
+
 
 let CODE_TYPES = [
   'best_model',
@@ -26,8 +28,9 @@ function remoteLog(obj) {
   })
 }
 
-function getCodes() {
-  fetch('http://localhost:5000/codes/foo', {
+function getCodes(hash) {
+  console.log(hash)
+  return fetch('http://localhost:5000/codes/'+hash, {
     method: 'get',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -43,7 +46,6 @@ function getCodes() {
     }
   })
 }
-getCodes();
 
 window.getCodes = getCodes;
 
@@ -65,7 +67,8 @@ class App extends Component {
       data: {
         from: this.state.currentStateIdx,
         to: stateIdx,
-      }
+      },
+      ready: false,
     })
   }
   next = (x) => {
@@ -74,8 +77,15 @@ class App extends Component {
   prev = () => {
     this.transition(this.state.currentStateIdx - 1)
   }
+  gotConsent = (crsid) => {
+    let hash = shajs('sha256').update(crsid).digest('hex');
+    getCodes(hash)
+      .then(() => {
+        this.next()
+      })
+  }
   states = [
-    (<Consent consentGiven={this.next}/>),
+    (<Consent consentGiven={this.gotConsent}/>),
 
     (<GiveCode code={() => CODES[0]} next={this.next} prev={this.prev}/>),
     (<Distractor next={this.next} prev={this.prev}/>),

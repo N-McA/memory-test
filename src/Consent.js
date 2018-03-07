@@ -2,6 +2,19 @@
 import React, { Component } from 'react';
 
 class Consent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+      correct: false,
+      failed: false,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
   render() {
     return (
       <div className="Consent">
@@ -29,7 +42,12 @@ class Consent extends Component {
           They do not.
         </p>
 
-        <button onClick={this.props.consentGiven}> I understand and wish to continue. </button>
+        <p>Please enter your CRSID:</p>
+        <form>
+          <input className='email-box' type="text" value={this.state.value} onChange={this.handleChange} />
+        </form>
+        <br/>
+        <button onClick={() => this.props.consentGiven(this.state.value)}> I understand and wish to continue. </button>
       </div>
     );
   }

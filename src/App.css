@@ -27,3 +27,6 @@
   to { transform: rotate(360deg); }
 }
 
+.consent-button {
+  padding: 1em;
+}
