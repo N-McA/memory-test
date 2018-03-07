@@ -12,6 +12,15 @@ class Consent extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  handleSubmit = () => {
+    if (this.state.value === "") {
+      alert(
+        'You must provide an email. It is only used locally.')
+    } else {
+      this.props.consentGiven(this.state.value)
+    }
+  }
+
   handleChange(event) {
     this.setState({value: event.target.value});
   }
@@ -47,7 +56,7 @@ class Consent extends Component {
           <input className='email-box' type="text" value={this.state.value} onChange={this.handleChange} />
         </form>
         <br/>
-        <button onClick={() => this.props.consentGiven(this.state.value)}> I understand and wish to continue. </button>
+        <button onClick={this.handleSubmit}> I understand and wish to continue. </button>
       </div>
     );
   }
