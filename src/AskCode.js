@@ -87,7 +87,7 @@ class AskCode extends Component {
           Please enter the last code you recieved.
         </h2>
 
-        <CodeForm stateLog={this.props.stateLog} target={this.props.code} next={this.props.next} prev={this.props.prev}/>
+        <CodeForm stateLog={this.props.stateLog} target={this.props.code()} next={this.props.next} prev={this.props.prev}/>
 
       </div>
     );

@@ -2,6 +2,10 @@
 import React, { Component } from 'react';
 
 class GiveCode extends Component {
+  constructor(props) {
+    super(props);
+    console.log('created')
+  }
   render() {
     return (
       <div className="GiveCode">
@@ -10,7 +14,7 @@ class GiveCode extends Component {
           Please inspect the following code.
         </p>
 
-        <h2>{this.props.code}</h2>
+        <h2>{this.props.code()}</h2>
 
         <p>
           You will later be asked to recall this code.

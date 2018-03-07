@@ -7,6 +7,12 @@ import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
 import Completed from './Completed.js'
 
+let CODE_TYPES = [
+  'best_model',
+  'worst_model',
+  'numeric',
+]
+
 let CODES=['bad fish breath', 'crazy silly nonsense', '07-35-37-23-48']
 
 function remoteLog(obj) {
@@ -29,8 +35,16 @@ function getCodes() {
     },
   })
   .then(x => x.json())
-  .then(console.log)
+  .then(codeObj => {
+    let i = 0;
+    for (let ct of CODE_TYPES) {
+      CODES[i] = codeObj[ct];
+      i ++;
+    }
+  })
 }
+getCodes();
+
 window.getCodes = getCodes;
 
 class App extends Component {
@@ -38,7 +52,8 @@ class App extends Component {
   stateLog = (x) => {
     x['time'] = (new Date()).getTime();
     this.stateLogList.push(x);
-    remoteLog(this.stateLogList);
+    if (x.type === 'ATTEMPT')
+      remoteLog(this.stateLogList);
   };
   transition(stateIdx) {
     this.setState({
@@ -62,17 +77,17 @@ class App extends Component {
   states = [
     (<Consent consentGiven={this.next}/>),
 
-    (<GiveCode code={CODES[0]} next={this.next} prev={this.prev}/>),
+    (<GiveCode code={() => CODES[0]} next={this.next} prev={this.prev}/>),
     (<Distractor next={this.next} prev={this.prev}/>),
-    (<AskCode stateLog={this.stateLog} code={CODES[0]} next={this.next} prev={this.prev}/>),
+    (<AskCode stateLog={this.stateLog} code={() => CODES[0]} next={this.next} prev={this.prev}/>),
     
-    (<GiveCode code={CODES[1]} next={this.next} prev={this.prev}/>),
+    (<GiveCode code={() => CODES[1]} next={this.next} prev={this.prev}/>),
     (<Distractor next={this.next} prev={this.prev}/>),
-    (<AskCode stateLog={this.stateLog} code={CODES[1]} next={this.next} prev={this.prev}/>),
+    (<AskCode stateLog={this.stateLog} code={() => CODES[1]} next={this.next} prev={this.prev}/>),
 
-    (<GiveCode code={CODES[2]} next={this.next} prev={this.prev}/>),
+    (<GiveCode code={() => CODES[2]} next={this.next} prev={this.prev}/>),
     (<Distractor next={this.next} prev={this.prev}/>),
-    (<AskCode stateLog={this.stateLog} code={CODES[2]} next={this.next} prev={this.prev}/>),
+    (<AskCode stateLog={this.stateLog} code={() => CODES[2]} next={this.next} prev={this.prev}/>),
 
     (<Completed/>),
   ];
