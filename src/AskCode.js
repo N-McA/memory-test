@@ -20,12 +20,31 @@ class CodeForm extends React.Component {
   handleSubmit(event) {
     console.log('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    console.log(this.props)
     let submitted = this.state.value.toLowerCase();
     if (submitted === this.props.target) {
       this.setState({correct: true});
+      this.props.stateLog({
+        type: 'ATTEMPT',
+        data: {
+          submitted: submitted,
+          target: this.props.target,
+          success: true,
+        }, 
+      })
     } else {
       this.setState({failed: true});
+      this.props.stateLog({
+        type: 'ATTEMPT',
+        data: {
+          submitted: submitted,
+          target: this.props.target,
+          success: false,
+        }, 
+      })
     }
+
+    console.log(this.props.stateLog)
   }
 
   render() {
@@ -68,7 +87,7 @@ class AskCode extends Component {
           Please enter the last code you recieved.
         </h2>
 
-        <CodeForm target={this.props.code} next={this.props.next} prev={this.props.prev}/>
+        <CodeForm stateLog={this.props.stateLog} target={this.props.code} next={this.props.next} prev={this.props.prev}/>
 
       </div>
     );
