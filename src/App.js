@@ -18,7 +18,7 @@ let CODE_TYPES = [
 let CODES=['bad fish breath', 'crazy silly nonsense', '07-35-37-23-48']
 
 function remoteLog(obj) {
-  fetch('http://localhost:5000/log', {
+  fetch(':5000/log', {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',
