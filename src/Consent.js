@@ -12,7 +12,8 @@ class Consent extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     if (this.state.value === "") {
       alert(
         'You must provide an email. It is only used locally.')
@@ -53,10 +54,21 @@ class Consent extends Component {
 
         <p>Please enter your CRSID:</p>
         <form>
-          <input className='email-box' type="text" value={this.state.value} onChange={this.handleChange} />
+          <input 
+            autoFocus
+            className='email-box text-box' 
+            type="text" value={this.state.value} 
+            onChange={this.handleChange}
+          />
+          <br/>
+          <div className="consent-button-wrapper">
+            <input 
+              type="submit" 
+              onClick={this.handleSubmit} 
+              value="I understand and wish to continue."
+            />
+          </div>
         </form>
-        <br/>
-        <button onClick={this.handleSubmit}> I understand and wish to continue. </button>
       </div>
     );
   }

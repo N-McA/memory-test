@@ -53,7 +53,12 @@ class CodeForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Code:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input 
+              autoFocus
+              className="text-box" 
+              type="text" value={this.state.value} 
+              onChange={this.handleChange}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>
