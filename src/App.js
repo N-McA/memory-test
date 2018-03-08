@@ -18,7 +18,7 @@ let CODE_TYPES = [
 let CODES=['bad fish breath', 'crazy silly nonsense', '07-35-37-23-48']
 
 function remoteLog(obj) {
-  fetch(':5000/log', {
+  fetch('https://memory-backend.nat-mcaleese.co.uk:5000/codes/log', {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -30,7 +30,7 @@ function remoteLog(obj) {
 
 function getCodes(hash) {
   console.log(hash)
-  return fetch('http://localhost:5000/codes/'+hash, {
+  return fetch('https://memory-backend.nat-mcaleese.co.uk:5000/codes/'+hash, {
     method: 'get',
     headers: {
       'Accept': 'application/json, text/plain, */*',
