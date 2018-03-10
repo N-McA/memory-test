@@ -1,6 +1,10 @@
 
 import React, { Component } from 'react';
 
+function normalise(s) {
+  return s.toLowerCase().replace(/-/g, '');
+}
+
 class CodeForm extends React.Component {
   constructor(props) {
     super(props);
@@ -21,8 +25,9 @@ class CodeForm extends React.Component {
     console.log('A name was submitted: ' + this.state.value);
     event.preventDefault();
     console.log(this.props)
-    let submitted = this.state.value.toLowerCase();
-    if (submitted === this.props.target) {
+    let submitted = normalise(this.state.value)
+    let target = normalise(this.props.target)
+    if (submitted === target) {
       this.setState({correct: true});
       this.props.stateLog({
         type: 'ATTEMPT',
@@ -92,6 +97,7 @@ class AskCode extends Component {
         <h2>
           Please enter the last code you recieved.
         </h2>
+        <p>Case (capitalisation) doesn't matter; you can skip "-"s too.</p>
 
         <CodeForm stateLog={this.props.stateLog} target={this.props.code()} next={this.props.next} prev={this.props.prev}/>
 
