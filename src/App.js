@@ -7,7 +7,7 @@ import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
 import Completed from './Completed.js'
 import browserId from './browserId.js'
-import {N_FACES} from './constants.js'
+import {N_FACES, memoryBackend} from './constants.js'
 
 import shajs from 'sha.js'
 import {range, zip, shuffle, debounce} from 'lodash'
@@ -22,7 +22,7 @@ let CODE_TYPES = [
 let CODES=['bad fish breath', 'crazy silly nonsense', '07-35-37-23-48']
 
 function remoteLog(obj) {
-  fetch('https://memory-backend.nat-mcaleese.co.uk:5000/log', {
+  fetch(memoryBackend + '/log', {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -34,7 +34,7 @@ function remoteLog(obj) {
 
 function getCodes(hash) {
   console.log(hash)
-  return fetch('https://memory-backend.nat-mcaleese.co.uk:5000/codes/'+hash, {
+  return fetch(memoryBackend + '/codes/'+hash, {
     method: 'get',
     headers: {
       'Accept': 'application/json, text/plain, */*',
