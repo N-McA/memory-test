@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   padding: 0.5em;
+  max-width: 35em;
+  margin: auto;
 }
 
 
@@ -27,3 +29,4 @@ h1 {
 button {
   margin: 1em;
 }
+
