@@ -57,6 +57,7 @@ class App extends Component {
   stateLog = (x) => {
     x['time'] = (new Date()).getTime();
     x['browserId'] = browserId();
+    x['codes'] = CODES;
     this.stateLogList.push(x);
     if (x.type === 'ATTEMPT')
       remoteLog(this.stateLogList);
