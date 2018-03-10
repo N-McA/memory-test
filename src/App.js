@@ -6,7 +6,10 @@ import GiveCode from './GiveCode.js'
 import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
 import Completed from './Completed.js'
+import browserId from './browserId.js'
+
 import shajs from 'sha.js'
+import {range, zip, shuffle, debounce} from 'lodash'
 
 
 let CODE_TYPES = [
@@ -39,8 +42,8 @@ function getCodes(hash) {
   })
   .then(x => x.json())
   .then(codeObj => {
-    let i = 0;
-    for (let ct of CODE_TYPES) {
+    let indices = shuffle(range(CODE_TYPES.length))
+    for (let [i, ct] of zip(indices, CODE_TYPES)) {
       CODES[i] = codeObj[ct];
       i ++;
     }
@@ -53,6 +56,7 @@ class App extends Component {
   stateLogList = [];
   stateLog = (x) => {
     x['time'] = (new Date()).getTime();
+    x['browserId'] = browserId();
     this.stateLogList.push(x);
     if (x.type === 'ATTEMPT')
       remoteLog(this.stateLogList);
@@ -85,7 +89,7 @@ class App extends Component {
       })
   }
   states = [
-    (<Consent consentGiven={this.gotConsent}/>),
+    (<Consent consentGiven={debounce(this.gotConsent, 500)}/>),
 
     (<GiveCode code={() => CODES[0]} next={this.next} prev={this.prev}/>),
     (<Distractor next={this.next} prev={this.prev}/>),
