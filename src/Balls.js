@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import './Balls.css'
-
+import {N_FACES} from './constants.js'
 
 function range(x) {
   let rs = []
@@ -33,8 +33,9 @@ export default class Balls extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      remainingClicks: 1,
+      remainingClicks: 15,
       selectedButton: randomInt(9),
+      selectedFace: randomInt(N_FACES),
     };
   };
 
@@ -42,6 +43,7 @@ export default class Balls extends Component {
     this.setState({
       remainingClicks: this.state.remainingClicks - 1,
       selectedButton: randomOtherInt(9, this.state.selectedButton),
+      selectedFace: randomOtherInt(N_FACES, this.state.selectedFace),
     })
     // bloody async, init.
     if (this.state.remainingClicks - 1 === 0) {
@@ -52,8 +54,8 @@ export default class Balls extends Component {
   render() {
     return (
       <div>
-        <h3>Click Cage!</h3>
-        <h3>{Math.max(this.state.remainingClicks, 0)} CageClicks remaining...</h3>
+        <h3>Click the celebrities!</h3>
+        <h3>{Math.max(this.state.remainingClicks, 0)} Clicks remaining...</h3>
         <div className="container">
           {
             range(N_BUTTONS).map(i => (
@@ -63,7 +65,7 @@ export default class Balls extends Component {
                   className="image-button"
                   type="image" 
                   alt="cage"
-                  src="static/nick-face.png"
+                  src={"static/faces/" + this.state.selectedFace + ".jpg"}
                   onClick={this.wacked}
                 />
               </div>

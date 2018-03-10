@@ -7,6 +7,7 @@ import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
 import Completed from './Completed.js'
 import browserId from './browserId.js'
+import {N_FACES} from './constants.js'
 
 import shajs from 'sha.js'
 import {range, zip, shuffle, debounce} from 'lodash'
@@ -48,6 +49,16 @@ function getCodes(hash) {
       i ++;
     }
   })
+}
+
+function celebPreFetches() {
+  let rs = []
+  for (let i=0; i<N_FACES; i++) {
+    rs.push(
+      <link rel="prefetch" href={"static/faces/" + i + ".jpg"} key={i}/>
+    )
+  }
+  return rs
 }
 
 window.getCodes = getCodes;
@@ -121,6 +132,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.pageState}
+        {celebPreFetches()}
       </div>
     );
   }
