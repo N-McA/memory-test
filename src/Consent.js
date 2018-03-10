@@ -52,10 +52,9 @@ class Consent extends Component {
           They do not.
         </p>
 
-        <p>Please enter your CRSID, an email or a username:</p>
+        <p>Please enter your CRSID, an email or a username of choice. This is just used as a consistent random seed, and is not transmitted over the network or stored.</p>
         <form>
           <input 
-            autoFocus
             className='email-box text-box' 
             type="text" value={this.state.value} 
             onChange={this.handleChange}
