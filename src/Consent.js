@@ -18,7 +18,7 @@ class Consent extends Component {
       alert(
         'You must provide an email. It is only used locally.')
     } else {
-      this.props.consentGiven(this.state.value)
+      this.props.consentGiven(this.state.value.toLowerCase())
     }
   }
 
