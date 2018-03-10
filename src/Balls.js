@@ -33,7 +33,7 @@ export default class Balls extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      remainingClicks: 15,
+      remainingClicks: 18,
       selectedButton: randomInt(9),
       selectedFace: randomInt(N_FACES),
     };

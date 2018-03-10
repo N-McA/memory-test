@@ -20,6 +20,7 @@ let CODE_TYPES = [
 ]
 
 let CODES=['bad fish breath', 'crazy silly nonsense', '07-35-37-23-48']
+let CODE_DICT= {}
 
 function remoteLog(obj) {
   fetch(memoryBackend + '/log', {
@@ -48,6 +49,7 @@ function getCodes(hash) {
       CODES[i] = codeObj[ct];
       i ++;
     }
+    CODE_DICT = codeObj;
   })
 }
 
@@ -68,7 +70,7 @@ class App extends Component {
   stateLog = (x) => {
     x['time'] = (new Date()).getTime();
     x['browserId'] = browserId();
-    x['codes'] = CODES;
+    x['codes'] = CODE_DICT;
     this.stateLogList.push(x);
     if (x.type === 'ATTEMPT')
       remoteLog(this.stateLogList);
