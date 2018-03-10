@@ -52,7 +52,7 @@ class Consent extends Component {
           They do not.
         </p>
 
-        <p>Please enter your CRSID:</p>
+        <p>Please enter your CRSID, an email or a username:</p>
         <form>
           <input 
             autoFocus
