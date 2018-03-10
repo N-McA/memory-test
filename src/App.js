@@ -107,6 +107,10 @@ class App extends Component {
       pageState: this.states[0],
       currentStateIdx: 0,
     }
+    // Hacks to make debugging more pleasant.
+    window.next = this.next
+    window.prev = this.prev
+    window.CODES = CODES
   }
   render() {
     return (
