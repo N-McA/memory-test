@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 function normalise(s) {
-  return s.toLowerCase().replace(/-/g, '');
+  return s.toLowerCase().replace(/-/g, '').replace(/ /g, '');
 }
 
 class CodeForm extends React.Component {

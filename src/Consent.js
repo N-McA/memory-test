@@ -34,6 +34,10 @@ class Consent extends Component {
           This website is an experiment designed to test the memorability of different encodings of arbitrary information.
         </p>
 
+        <h4>
+          For most people, it takes less than five minutes!
+        </h4>
+
         <p>
           The experiment is designed to be straightforward and fun. 
           Your results will be associated with a unique pseudonymous identifier, 
