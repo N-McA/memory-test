@@ -42,7 +42,7 @@ class CodeForm extends React.Component {
       this.props.stateLog({
         type: 'ATTEMPT',
         data: {
-          submitted: submitted,
+          submitted: this.state.value,
           target: this.props.target,
           success: false,
         }, 
