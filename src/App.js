@@ -11,6 +11,8 @@ import {N_FACES, memoryBackend} from './constants.js'
 
 import shajs from 'sha.js'
 import {range, zip, shuffle, debounce} from 'lodash'
+import {getURLParams} from './utils.js'
+window.getURLParams = getURLParams
 
 
 let CODE_TYPES = [
