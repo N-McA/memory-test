@@ -71,9 +71,8 @@ class CodeForm extends React.Component {
         {this.state.failed &&
           (<div>
             <p>Incorrect!</p>
-            <p>Note that you can go back to remind yourself, and you must enter the code correctly to continue with the experiment.</p>
-            <p>Please don't give up. This is for science!</p>
-            <button onClick={this.props.prev}>Previous</button>
+            <p>Please keep going. This is for science!</p>
+            <button onClick={this.props.next}>Next</button>
           </div>)
         }
 
