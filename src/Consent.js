@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import {getURLParams} from './utils.js'
 
 class Consent extends Component {
   constructor(props) {
@@ -14,11 +15,14 @@ class Consent extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.value === "") {
-      alert(
-        'You must provide an email. It is only used locally.')
+    let params = getURLParams()
+    let assId = params.assignmentId
+    if (!assId) {
+      alert('Not publically available at the moment.')
+    } else if (assId === 'ASSIGNMENT_ID_NOT_AVAILABLE') {
+      alert('You must accept the task to continue.')
     } else {
-      this.props.consentGiven(this.state.value.toLowerCase())
+      this.props.consentGiven(assId);
     }
   }
 
@@ -56,14 +60,7 @@ class Consent extends Component {
           They do not.
         </p>
 
-        <p>Please enter your CRSID, an email or a username of choice. This is just used as a consistent random seed, and is not transmitted over the network or stored.</p>
         <form>
-          <input 
-            className='email-box text-box' 
-            type="text" value={this.state.value} 
-            onChange={this.handleChange}
-          />
-          <br/>
           <div className="consent-button-wrapper">
             <input 
               type="submit" 
