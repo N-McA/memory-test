@@ -32,8 +32,8 @@ class Consent extends Component {
   render() {
     return (
       <div className="Consent">
-        <h1>Consent</h1>
-
+        <h1>Memory Test</h1>
+        <h2>Consent</h2>
         <p>
           This website is an experiment designed to test the memorability of different encodings of arbitrary information.
         </p>
