@@ -30,3 +30,8 @@ button {
   margin: 1em;
 }
 
+#completeButton {
+  font-size: 2em;
+  padding: 1em;
+  margin: 1em;
+}
