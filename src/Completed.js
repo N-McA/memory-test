@@ -7,14 +7,9 @@ function amazonSubmit(obj) {
   let url = params.turkSubmitTo 
   url = url + '/mturk/externalSubmit'
   url = url + '?assignmentId=' + params.assignmentId
-  let body = "data=" + JSON.stringify(obj);
+  url = url + "&data=done";
   return fetch(url, {
-    method: 'post',
-    // headers: {
-    //   'Accept': 'application/json, text/plain, */*',
-    //   'Content-Type': 'application/json'
-    // },
-    body: body,
+    method: 'get',
   })
 }
 
