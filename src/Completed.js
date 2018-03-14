@@ -5,7 +5,7 @@ import { getURLParams } from './utils.js';
 function amazonSubmit(obj) {
   let params = getURLParams()
   let url = params.turkSubmitTo 
-  url = url + '/mturk/externalSubmit/'
+  url = url + '/mturk/externalSubmit'
   url = url + '?assignmentId=' + params.assignmentId
   let body = "data=" + JSON.stringify(obj);
   return fetch(url, {
