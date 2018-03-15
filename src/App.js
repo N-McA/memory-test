@@ -5,6 +5,7 @@ import Consent from './Consent.js'
 import GiveCode from './GiveCode.js'
 import Distractor from './Distractor.js'
 import AskCode from './AskCode.js'
+import AskCheat from './AskCheat.js'
 import Completed from './Completed.js'
 import browserId from './browserId.js'
 import {N_FACES, memoryBackend} from './constants.js'
@@ -36,7 +37,6 @@ function remoteLog(obj) {
 }
 
 function getCodes(hash) {
-  console.log(hash)
   return fetch(memoryBackend + '/codes/'+hash, {
     method: 'get',
     headers: {
@@ -69,12 +69,12 @@ window.getCodes = getCodes;
 
 class App extends Component {
   stateLogList = [];
-  stateLog = (x) => {
+  stateLog = (x, force=false) => {
     x['time'] = (new Date()).getTime();
     x['browserId'] = browserId();
     x['codes'] = CODE_DICT;
     this.stateLogList.push(x);
-    if (x.type === 'ATTEMPT')
+    if (x.type === 'ATTEMPT' || force)
       remoteLog(this.stateLogList);
   };
   transition(stateIdx) {
@@ -119,6 +119,7 @@ class App extends Component {
     (<Distractor next={this.next} prev={this.prev}/>),
     (<AskCode stateLog={this.stateLog} code={() => CODES[2]} next={this.next} prev={this.prev}/>),
 
+    (<AskCheat next={this.next} stateLog={this.stateLog}/>),
     (<Completed/>),
   ];
   constructor(props) {
